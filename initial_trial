@@ -23,14 +23,11 @@ def reduction(pile, n):
     return newpile
 
 def run_pile(n, x):
-    #x = n - 1 + x
-    pile1 = x # original pile
-    pile2 = reduction(pile1, n)
-    pile3 = reduction(pile2, n)
-    pile4 = reduction(pile3, n)
-    pile5 = reduction(pile4, n)
-    final_pile = reduction(pile5, n)
-    return final_pile
+    pile = x
+    for i in range(0, n):
+        pile = reduction(pile, n)
+   
+    return pile
 
 
 
