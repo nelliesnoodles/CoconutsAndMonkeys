@@ -44,6 +44,7 @@ def recurse_pile(n, x):
         print(pile)
         return pile
     else:
+        x -= 1
         x = x * n
         return recurse_pile(n, x)
 
