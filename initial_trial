@@ -1,0 +1,59 @@
+
+# coconuts and monkeys
+
+"""
+There are five pirates and a pile of coconuts.
+First pirate until the last, wakes up and divides the pile up by 5, there is always
+one remaining, which the pirate gives to a monkey, the pirate takes his share, hides it.
+
+The next pirate wakes up to the pile, and does the same.
+
+Until in the morning the pile that remains is divisible by 5, and each pirate gets his equivelant share.
+
+"""
+
+
+def reduction(pile, n):
+    # pirate divides pile up by 5 (number of pirates) gives remainder 1 to monkey
+    print(f"original pile = {pile}")
+    pirates_share = (pile - 1) / n
+    newpile = pile - pirates_share - 1
+    print(f"pirates_share = {pirates_share}, monkey's share = 1, newpile = {pile} - {pirates_share} - 1")
+    print(f"newpile = {newpile}")
+    return newpile
+
+def run_pile(n, x):
+    #x = n - 1 + x
+    pile1 = x # original pile
+    pile2 = reduction(pile1, n)
+    pile3 = reduction(pile2, n)
+    pile4 = reduction(pile3, n)
+    pile5 = reduction(pile4, n)
+    final_pile = reduction(pile5, n)
+    return final_pile
+
+
+def recurse_pile(n, x):
+    pile = run_pile(n, x)
+    if pile % n == 0:
+        print("x = ", x)
+        print("n = ", n)
+        print("x * n =", x * n)
+        print(pile)
+        return pile
+    else:
+        x = x * n
+        return recurse_pile(n, x)
+
+#recurse_pile(5, 25)
+run_pile(5, 3121)
+
+
+        
+
+    
+
+    
+
+
+        
