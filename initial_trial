@@ -33,7 +33,9 @@ def run_pile(n, x):
     return final_pile
 
 
+
 def recurse_pile(n, x):
+    x += 1
     pile = run_pile(n, x)
     if pile % n == 0:
         print("x = ", x)
