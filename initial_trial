@@ -13,45 +13,46 @@ Until in the morning the pile that remains is divisible by 5, and each pirate ge
 """
 
 
-def reduction(pile, n):
+def reduction(pile, pirates, remainder):
     # pirate divides pile up by 5 (number of pirates) gives remainder 1 to monkey
-    print(f"original pile = {pile}")
-    pirates_share = (pile - 1) / n
-    newpile = pile - pirates_share - 1
-    print(f"pirates_share = {pirates_share}, monkey's share = 1, newpile = {pile} - {pirates_share} - 1")
-    print(f"newpile = {newpile}")
+    #print(f"original pile = {pile}")
+    pirates_share = (pile - remainder) / pirates
+    newpile = pile - pirates_share - remainder
+    #print(f"pirates_share = {pirates_share}, monkey's share = 1, newpile = {pile} - {pirates_share} - 1")
+    #print(f"newpile = {newpile}")
     return newpile
 
-def run_pile(n, x):
-    pile = x
-    for i in range(0, n):
-        pile = reduction(pile, n)
+def run_pile(pirates, original_pile, remainder):
+    #x = n - 1 + x
+    pile = original_pile
+    for i in range(0, pirates):
+        print("pile =", pile)
+        pile = reduction(pile, pirates, remainder)
    
     return pile
 
 
-
-def recurse_pile(n, x):
-    x += 1
-    pile = run_pile(n, x)
-    if pile % n == 0:
-        print("x = ", x)
-        print("n = ", n)
-        print("x * n =", x * n)
-        print(pile)
+def recurse_pile(pirates, original_pile, remainder, max=None):
+    # add the remainder
+    if max == None:
+        max = pirates ** (pirates) + remainder
+    
+    pile = run_pile(pirates, original_pile, remainder)
+    if pile % pirates == 0 or original_pile > max:
+        print(f"original_pile = {original_pile}")
         return pile
     else:
-        x -= 1
-        x = x * n
-        return recurse_pile(n, x)
+        quotient = pirates - remainder
+        original_pile += quotient
+        print("max = ", max)
+        print("new_pile = ", original_pile)
+      
+        return recurse_pile(pirates, original_pile, remainder, max)
 
-#recurse_pile(5, 25)
-run_pile(5, 3121)
+recurse_pile(5, 3121, 1) #work original_pile = first number, (pirates ** pirates + remainder)
+#recurse_pile(3, 29, 2) #work 
+#recurse_pile(6, 46657, 1, max=47000) #fail
 
-
-        
-
-    
 
     
 
